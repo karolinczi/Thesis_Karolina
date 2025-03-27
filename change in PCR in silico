@@ -1,0 +1,16 @@
+#To prevent the program generating separate tabeles for each outcome the following changes had been applied to https://github.com/SemiQuant/PrimerJinn
+
+#replaced line number 205 with:
+amp_df.to_csv(out_file + '.tsv', mode='a', index=False, sep="\t")
+
+#commented out line 254:
+ #from this:
+with pd.ExcelWriter(out_file + '.xlsx', engine='xlsxwriter') as writer:
+        amp_df.to_excel(writer, sheet_name='amplicons', index=False)
+        dimers.to_excel(writer, sheet_name='dimers', index=False)
+        tm_df.to_excel(writer, sheet_name='interactions', index=False)
+#To this:
+  #with pd.ExcelWriter(out_file + '.xlsx', engine='xlsxwriter') as writer:
+#        amp_df.to_excel(writer, sheet_name='amplicons', index=False)
+#        dimers.to_excel(writer, sheet_name='dimers', index=False)
+#        tm_df.to_excel(writer, sheet_name='interactions', index=False)
