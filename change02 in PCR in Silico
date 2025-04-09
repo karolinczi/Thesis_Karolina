@@ -1,0 +1,4 @@
+#second change that we introduced to the original PCR in silico code was related to the abbility of the code reading big assembled fasta file with multiple sequences
+#the original code lacked this functionality becasue it was also supposed to serve other functions that were not importnat for me in this project 
+#like multi primer design.
+#to do that the whole section between lines X and X have been commented out
