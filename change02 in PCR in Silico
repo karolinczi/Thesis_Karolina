@@ -1,4 +1,52 @@
 #second change that we introduced to the original PCR in silico code was related to the abbility of the code reading big assembled fasta file with multiple sequences
 #the original code lacked this functionality becasue it was also supposed to serve other functions that were not importnat for me in this project 
 #like multi primer design.
-#to do that the whole section between lines X and X have been commented out
+#to do that the whole section between lines 212 (starting with #get interactions) and 255 (ending before ##with pd.ExcelWriter(out_file + '.xlsx', engine='xlsxwriter') as writer:) 
+#have been commented out
+
+
+    # get interactions
+    '''
+    amplicons = []
+    ref_seq = SeqIO.read(ref_fasta_file, "fasta").seq
+    for index, row in amp_df.iterrows():
+        ref_region = row['ref_region']
+        #add in the primer sequences
+        if row['direction1'] == '-':
+            pf_seq = Seq(row['qseq1_input'])
+            pf_seq = str(pf_seq.reverse_complement())
+        else:
+            pf_seq = Seq(row['qseq1_input'])
+        if row['direction2'] == '-':
+            pr_seq = Seq(row['qseq2_input'])
+            pr_seq = str(pf_seq.reverse_complement())
+        else:
+            pr_seq = Seq(row['qseq2_input'])
+        ref_start, ref_end = ref_region.split(",")
+        ref_end = int(ref_end)
+        ref_start = int(ref_start)
+        if ref_start > ref_end:
+            amplicon_seq = ref_seq[ref_end-1:ref_start]
+        else:
+            amplicon_seq = ref_seq[ref_start-1:ref_end]
+        amplicon_seq = str(pf_seq) + str(amplicon_seq) + str(pr_seq)
+        amplicons.append({'Forward_primer':  row['qseq1'], 'Reverse_primer':  row['qseq2'], 'amplicon_seq': amplicon_seq})
+
+
+    tm_data = []
+    for pair in itertools.combinations(amplicons, 2):
+        # tm = MeltingTemp.Tm_NN(pair[0]['amplicon_seq'], pair[1]['amplicon_seq'], Na=salt_conc, saltcorr=7)
+        try:
+            tm = calc_tm(seq=pair[0]['amplicon_seq'], seq2=pair[1]['amplicon_seq'])
+            tm_data.append({"amplicon1_PF": pair[0]['Forward_primer'],
+                "amplicon1_PR": pair[0]['Reverse_primer'],
+                "amplicon2_PF": pair[1]['Forward_primer'],
+                "amplicon2_PR": pair[1]['Reverse_primer'], 
+                'tm': str(tm)})
+        except:
+            continue
+
+    tm_df = pd.DataFrame(tm_data)
+    # print("Writing output to " + out_file + '_amplicon_interactions.tsv')
+    # tm_df.to_csv(out_file + '_amplicon_interactions.tsv', index=False, sep="\t")
+'''
